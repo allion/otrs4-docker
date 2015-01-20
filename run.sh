@@ -1,7 +1,7 @@
 #!/bin/bash
 service mysqld start &
 wait
-mysql -uroot -e "CREATE DATABASE otrs;CREATE USER 'otrs'@'localhost' IDENTIFIED BY 'otrs';GRANT ALL PRIVILEGES ON otrs.* TO 'otrs'@'localhost' WITH GRANT OPTION;"&
+mysql -uroot -e "CREATE DATABASE otrs CHARACTER SET utf8 COLLATE utf8_general_ci;CREATE USER 'otrs'@'localhost' IDENTIFIED BY 'otrs';GRANT ALL PRIVILEGES ON otrs.* TO 'otrs'@'localhost' WITH GRANT OPTION;"&
 wait
 cat /opt/otrs/scripts/database/otrs-schema.mysql.sql | mysql -f -u root otrs &
 wait
