@@ -14,6 +14,9 @@ RUN wget http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-4.0.5-01.noarch.rpm
 RUN yum -y install otrs-4.0.5-01.noarch.rpm --skip-broken
 RUN rm -f otrs-4.0.5-01.noarch.rpm
 
+# Change localtime
+RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+
 #OTRS COPY Configs
 ADD Config.pm /opt/otrs/Kernel/Config.pm
 RUN sed -i -e"s/mod_perl.c/mod_perl.so/" /etc/httpd/conf.d/zzz_otrs.conf
